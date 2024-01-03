@@ -74,8 +74,11 @@ is_yes && sudo apt install snapd -y || sudo apt install snapd
 # Below packages will be installed from snapd since they are regurlarly updated.
 sudo snap install code --classic
 sudo snap install nvim --classic
+sudo snap install redis
+sudo snap install 
 
 setup_zsh
 setup_neovim_config
 
 sh goinstall.sh
+sh nodeinstall.sh
