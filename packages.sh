@@ -79,6 +79,3 @@ sudo snap install
 
 setup_zsh
 setup_neovim_config
-
-sh goinstall.sh
-sh nodeinstall.sh
