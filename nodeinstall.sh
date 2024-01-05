@@ -1,3 +1,5 @@
+!#bin/sh
+
 release_url=https://nodejs.org/en/blog/release
 version=$(curl -s "$release_url" | grep -Po "Node v[0-9]+.[0-9]+.[0-9]+ \(LTS\)" | awk -F ' ' 'gsub("v", "", $2) {print $2}' | awk -F '.' '{print $1, $2, $3}' | sort -k1 -k2 -k3 -n | tail -1 | awk '{print $1"."$2"."$3}')
 

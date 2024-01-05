@@ -25,4 +25,3 @@ rm -rf "go$version.linux-amd64.tar.gz"
 
 curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh
 echo  export PATH='$PATH:'$HOME/go/bin >> $HOME/.zshrc
-
