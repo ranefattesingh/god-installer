@@ -160,8 +160,8 @@ install_nodejs() {
 install_docker() {
     read -p "Do you wish to install Docker? [Y/n]" yn
     case $yn in
-        [Yy] ) 	sudo apt-get update
-				sudo apt-get install ca-certificates curl gnupg
+        [Yy] ) 	sudo apt-get update -y
+				sudo apt-get install ca-certificates curl gnupg -y
 				sudo install -m 0755 -d /etc/apt/keyrings
 				curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 				sudo chmod a+r /etc/apt/keyrings/docker.gpg
@@ -174,9 +174,9 @@ install_docker() {
 
 				sudo apt-get update
 
-				sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+				sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 
-				sudo groupadd docker
+				# sudo groupadd docker
 
 				sudo usermod -aG docker $USER
 
@@ -205,13 +205,13 @@ install_minikube() {
     case $yn in
         [Yy] ) 	curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 				sudo install minikube-linux-amd64 /usr/local/bin/minikube
+				rm -rf minikube-linux-amd64
+				minikube start
 				echo "Enable kube-ps1?"
 				read -p "(Important) Needs zsh + oh-my-zsh installed [Y/n]" yn
 				case $yn in
-					[Yy] ) 	curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-							sudo install minikube-linux-amd64 /usr/local/bin/minikube
-							minikube start
-							rm -rf minikube-linux-amd64;;
+					[Yy] ) 	sed -i -e 's/plugins=(git)/plugins=(git)\nplugins=(kube-ps1)/g' $HOME/.zshrc
+							sed -i -e 's/source $ZSH\/oh-my-zsh.sh/source $ZSH\/oh-my-zsh.sh\nPROMPT=''$(kube_ps1)''$PROMPT/g' $HOME/.zshrc;;	
 				esac;;
     esac
 }
