@@ -235,7 +235,7 @@ install_devtools() {
 	install_minikube
 }
 
-install_basic
+install_apt_packages
 install_on_my_zsh
 install_deb_packages
 install_snapd_packages
