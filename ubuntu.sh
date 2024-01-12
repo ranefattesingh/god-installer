@@ -189,14 +189,16 @@ install_jdk() {
     case $yn in
         [Yy] ) 	jdk_url=https://aws.amazon.com/corretto/\?filtered-posts.sort-by\=item.additionalFields.createdDate\&filtered-posts.sort-order\=desc
 				version=$(curl -s "$jdk_url" | awk -F 'Download Amazon Corretto'  'gsub(/<\/span> <\/a>/, "", $2) {print $2}' | sort -g | tail -1 | sed 's/ //g')
-
-				curl -OL "https://corretto.aws/downloads/latest/amazon-corretto-$version-x64-linux-jdk.deb"
-
-				deb_file=$(ls | grep java-$version-amazon-corretto-jdk)
-
-				sudo dpkg -i $deb_file
-
-				rm -rf amazon-corretto-$version-x64-linux-jdk.deb
+				curl -OL "https://corretto.aws/downloads/latest/amazon-corretto-$version-x64-linux-jdk.tar.gz"
+				tar_file=$(ls | grep amazon-corretto-$version-x64-linux-jdk)
+				tar -zxvf $tar_file
+				rm -rf $tar_file
+				dir_name=$(ls | grep amazon-corretto)
+				mv $dir_name java-$version-openjdk-amd64
+				sudo mv java-$version-openjdk-amd64 /usr/lib/jvm/
+				echo export JAVA_HOME=/usr/lib/jvm/java-$version-openjdk-amd64 >> $HOME/.zshrc
+				echo export PATH=$PATH:$JAVA_HOME/bin >> $HOME/.zshrc
+				echo export JAVA_HOME=/usr/lib/jvm/java-$version-openjdk-amd64 >> /etc/environment
     esac
 }
 
@@ -246,6 +248,8 @@ install_on_my_zsh
 install_deb_packages
 install_snapd_packages
 install_devtools
+
+source $HOME/.zshrc
 
 #files=$(ls ./lib | grep '.sh')
 #for file in $files
