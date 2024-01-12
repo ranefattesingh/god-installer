@@ -150,8 +150,8 @@ install_nodejs() {
 				export PATH=$PATH:~/.npm-global/bin
 
 				mkdir ~/.npm-global
-				echo export NPM_CONFIG_PREFIX=~/.npm-global >> $HOME/.zshrc
-				echo export PATH='$PATH:'~/.npm-global/bin >> $HOME/.zshrc
+				echo "export NPM_CONFIG_PREFIX=~/.npm-global" >> $HOME/.zshrc
+				echo "export PATH='$PATH:'~/.npm-global/bin" >> $HOME/.zshrc
 
 				/usr/local/node/bin/npm install --global pnpm;;
     esac
@@ -194,11 +194,12 @@ install_jdk() {
 				tar -zxvf $tar_file
 				rm -rf $tar_file
 				dir_name=$(ls | grep amazon-corretto)
-				mv $dir_name java-$version-openjdk-amd64
-				sudo mv java-$version-openjdk-amd64 /usr/lib/jvm/
-				echo export JAVA_HOME=/usr/lib/jvm/java-$version-openjdk-amd64 >> $HOME/.zshrc
-				echo export PATH=$PATH:$JAVA_HOME/bin >> $HOME/.zshrc
-				echo export JAVA_HOME=/usr/lib/jvm/java-$version-openjdk-amd64 >> /etc/environment
+				mv $dir_name java-$version-amazon-corretto-jdk
+				sudo mkdir /usr/lib/jvm
+				sudo mv java-$version-amazon-corretto-jdk /usr/lib/jvm/
+				#sudo echo "export JAVA_HOME=/usr/lib/jvm/java-$version-amazon-corretto-jdk" >> /etc/environment
+				echo "export JAVA_HOME=/usr/lib/jvm/java-$version-amazon-corretto-jdk" >> $HOME/.zshrc
+				echo "export PATH=$PATH:$JAVA_HOME/bin" >> $HOME/.zshrc
     esac
 }
 
