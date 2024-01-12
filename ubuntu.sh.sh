@@ -209,7 +209,9 @@ install_minikube() {
 				read -p "(Important) Needs zsh + oh-my-zsh installed [Y/n]" yn
 				case $yn in
 					[Yy] ) 	curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-							sudo install minikube-linux-amd64 /usr/local/bin/minikube;;
+							sudo install minikube-linux-amd64 /usr/local/bin/minikube
+							minikube start
+							rm -rf minikube-linux-amd64;;
 				esac;;
     esac
 }
