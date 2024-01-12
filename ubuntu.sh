@@ -158,7 +158,7 @@ install_nodejs() {
 }
 
 install_docker() {
-    read -p "Do you wish to install Node.js? [Y/n]" yn
+    read -p "Do you wish to install Docker? [Y/n]" yn
     case $yn in
         [Yy] ) 	sudo apt-get update
 				sudo apt-get install ca-certificates curl gnupg
