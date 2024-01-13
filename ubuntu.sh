@@ -176,6 +176,7 @@ install_devtools() {
 	install_minikube
 	install_helm3
 	install_postgresql
+	install_redis
 }
 
 initialize_pgp_keys
