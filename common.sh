@@ -1,5 +1,17 @@
 #!/bin/bash
 
+load_neovim_config() {
+	echo "Do you wish to load default Neovim config of ThePrimeagen modified by Fattesingh Rane"
+    read -p "(Caution) This will remove and reload the new config for Neovim? [Y/n]" yn
+    case $yn in
+        [Yy] )	rm -rf $HOME/.config/nvim
+				rm -rf $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
+				git clone --depth 1 https://github.com/ranefattesingh/nvim.git $HOME/.config/nvim
+				git clone --depth 1 https://github.com/wbthomason/packer.nvim  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+				nvim --headless -n -u $HOME/.config/nvim/lua/ranefattesingh/packer.lua -c 'autocmd User PackerComplete quitall' -c 'PackerSync';;
+    esac
+}
+
 install_on_my_zsh() {
     read -p "Do you wish to install oh-my-zsh? [Y/n]" yn
     case $yn in

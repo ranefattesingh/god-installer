@@ -7,18 +7,6 @@ install_vscode() {
     esac
 }
 
-load_neovim_config() {
-	echo "Do you wish to load default Neovim config of ThePrimeagen modified by Fattesingh Rane"
-    read -p "(Caution) This will remove and reload the new config for Neovim? [Y/n]" yn
-    case $yn in
-        [Yy] )	rm -rf $HOME/.config/nvim
-				rm -rf $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
-				git clone --depth 1 https://github.com/ranefattesingh/nvim.git $HOME/.config/nvim
-				git clone --depth 1 https://github.com/wbthomason/packer.nvim  ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-				nvim --headless -n -u $HOME/.config/nvim/lua/ranefattesingh/packer.lua -c 'autocmd User PackerComplete quitall' -c 'PackerSync';;
-    esac
-}
-
 install_neovim() {
     read -p "Do you wish to install Neovim? [Y/n]" yn
     case $yn in
@@ -42,13 +30,28 @@ install_intellij_idea_community_edition() {
 }
 
 install_pycharm_community_edition() {
-    read -p "Do you wish to install Intellij IDEA Community Edition? [Y/n]" yn
+    read -p "Do you wish to install Pycharm Community Edition? [Y/n]" yn
     case $yn in
-        [Yy] ) sudo snap install intellij-idea-community --classic;;
+        [Yy] ) sudo snap install pycharm-community --classic;;
     esac
 }
 
-install_pycharm_community_edition() {
+install_postman() {
+    read -p "Do you wish to install Postman? [Y/n]" yn
+    case $yn in
+        [Yy] ) sudo snap install postman;;
+    esac
+}
+
+install_insomnia() {
+    read -p "Do you wish to install Insomnia? [Y/n]" yn
+    case $yn in
+        [Yy] ) sudo snap install insomnia;;
+    esac
+}
+
+
+install_android_studio() {
     read -p "Do you wish to install Android Studio? [Y/n]" yn
     case $yn in
         [Yy] ) sudo snap install android-studio --classic;;
@@ -108,6 +111,8 @@ install_apt_packages() {
 }
 
 
+source ./common.sh
+
 install_deb_packages() {
 	install_ripgrep
 }
@@ -116,11 +121,13 @@ install_snapd_packages() {
 	install_vscode
 	install_neovim
 	install_sublime_text_3
+	install_insomnia
+	install_postman
+	install_android_studio
 	install_intellij_idea_community_edition
 	install_pycharm_community_edition
 }
 
-source ./devtools.sh
 install_devtools() {
 	install_on_my_zsh
 	install_golang
