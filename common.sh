@@ -29,11 +29,14 @@ install_on_my_zsh() {
 
 						# Installing Oh-My-Zsh
 						sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)";;
+						exec zsh
 					2 )	# Upgrade Oh-My-Zsh
 						$ZSH/tools/upgrade.sh;;
+						exec zsh
 					esac
 				else
 					sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+					exec zsh
 				fi;;
     esac
 }
