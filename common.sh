@@ -136,5 +136,9 @@ install_helm3() {
 				./get_helm.sh
 				rm -rf get_helm.sh;;
     esac
-	
+}
+
+install_rust() {
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+	echo export PATH='$PATH:.cargo/bin' >> $HOME/.zshrc
 }

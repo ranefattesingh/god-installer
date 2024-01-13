@@ -97,17 +97,27 @@ install_ripgrep() {
 }
 
 install_apt_packages() {
-	sudo apt update -y
-	sudo apt updgrade -y
-	sudo apt install build-essential -y
-	sudo apt install curl -y
-	sudo apt install git -y
-	sudo apt install wget -y
-	sudo apt install wl-clipboard -y
-	sudo apt install fzf -y
-	sudo apt install snapd -y
-	sudo apt install zsh -y
-	sudo apt install tmux -y
+	sudo apt-get update -y
+	sudo apt-get upgrade -y
+	sudo apt-get install build-essential -y
+	sudo apt-get install curl -y
+	sudo apt-get install git -y
+	sudo apt-get install wget -y
+	sudo apt-get install wl-clipboard -y
+	sudo apt-get install fzf -y
+	sudo apt-get install snapd -y
+	sudo apt-get install zsh -y
+	sudo apt-get install tmux -y
+	sudo apt-get install libgl1-mesa-glx -y
+	sudo apt-get install libegl1-mesa -y
+	sudo apt-get install libxrandr2 -y
+	sudo apt-get install libxrandr2 -y
+	sudo apt-get install libxss1 -y
+	sudo apt-get install libxcursor1 -y
+	sudo apt-get install libxcomposite1 -y
+	sudo apt-get install libasound2 -y
+	sudo apt-get install libxi6 -y
+	sudo apt-get install libxtst6 -y
 }
 
 
