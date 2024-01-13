@@ -104,6 +104,7 @@ install_apt_packages() {
 	sudo apt install fzf -y
 	sudo apt install snapd -y
 	sudo apt install zsh -y
+	sudo apt install tmux -y
 }
 
 
@@ -127,6 +128,7 @@ install_devtools() {
 	install_docker
 	install_jdk
 	install_minikube
+	install_helm3
 }
 
 install_apt_packages

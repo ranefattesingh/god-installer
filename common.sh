@@ -115,3 +115,14 @@ install_minikube() {
 				esac;;
     esac
 }
+
+install_helm3() {
+    read -p "Do you wish to install helm3? [Y/n]" yn
+    case $yn in
+        [Yy] ) 	curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+				chmod 700 get_helm.sh
+				./get_helm.sh
+				rm -rf get_helm.sh;;
+    esac
+	
+}
