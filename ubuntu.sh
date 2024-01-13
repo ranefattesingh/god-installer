@@ -81,7 +81,7 @@ install_docker() {
 
 				sudo usermod -aG docker $USER
 
-				newgrp docker;;
+				exec newgrp docker;;
     esac
 }
 
@@ -92,8 +92,37 @@ install_ripgrep() {
 				sudo dpkg -i ripgrep_13.0.0_amd64.deb
 				rm -rf ripgrep_13.0.0_amd64.deb;;
     esac
-	
+}
 
+install_postgresql() {
+    read -p "Do you wish to install postgresql? [Y/n]" yn
+    case $yn in
+		sudo sh -c 'echo "deb https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+		wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo tee /etc/apt/trusted.gpg.d/ACCC4CF8.asc
+		sudo apt-get update
+		sudo apt-get install postgresql -y
+		
+		curl -fsS https://www.pgadmin.org/static/packages_pgadmin_org.pub | sudo gpg --dearmor -o /usr/share/keyrings/packages-pgadmin-org.gpg
+		sudo sh -c 'echo "deb [signed-by=/usr/share/keyrings/packages-pgadmin-org.gpg] https://ftp.postgresql.org/pub/pgadmin/pgadmin4/apt/$(lsb_release -cs) pgadmin4 main" > /etc/apt/sources.list.d/pgadmin4.list && apt update'
+		sudo apt install pgadmin4
+		sudo apt install pgadmin4-desktop
+		sudo apt install pgadmin4-web;;
+    esac
+}
+
+install_redis() {
+	curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+
+	echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+
+	sudo apt-get update
+	sudo apt-get install redis
+}
+
+initialize_pgp_keys() {
+	if [ ! -d "/etc/apt/keyrings" ]; then	
+		sudo mkdir -m 0755 /etc/apt/keyrings
+	fi
 }
 
 install_apt_packages() {
@@ -146,8 +175,10 @@ install_devtools() {
 	install_jdk
 	install_minikube
 	install_helm3
+	install_postgresql
 }
 
+initialize_pgp_keys
 install_apt_packages
 install_deb_packages
 install_snapd_packages
