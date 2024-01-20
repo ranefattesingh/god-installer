@@ -9,4 +9,4 @@ deb_file=$(ls | grep java-$version-amazon-corretto-jdk)
 
 sudo dpkg -i $deb_file
 
-# rm -rf amazon-corretto-$version-x64-linux-jdk.deb
+rm -rf amazon-corretto-$version-x64-linux-jdk.deb
